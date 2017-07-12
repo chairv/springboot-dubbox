@@ -1,9 +1,11 @@
 package cn.zhangxd.platform.common.service.datasource;
 
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * 动态数据源实现读写分离
@@ -63,5 +65,10 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     public void setReadDataSource(Object readDataSource) {
         this.readDataSource = readDataSource;
+    }
+
+    @Override
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+        return null;
     }
 }
